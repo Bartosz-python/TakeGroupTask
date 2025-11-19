@@ -26,7 +26,7 @@ def playwright_setup(playwright: Playwright, request):
     page.set_default_timeout(10000)
     page.set_default_navigation_timeout(20000)
 
-    os.makedirs(exist_ok = True)
+    os.makedirs("traces", exist_ok = True)
 
     try:
         yield page
