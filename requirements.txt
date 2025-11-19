@@ -2,3 +2,4 @@ playwright
 pytest-playwright
 pytest-html
 pytest
+pytest-xdist
