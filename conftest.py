@@ -13,7 +13,7 @@ def playwright_setup(playwright: Playwright, request):
     browser_name = request.config.getoption("browser_name")
 
     if browser_name == "chrome":
-        browser: Browser = playwright.chromium.launch(headless = False)
+        browser: Browser = playwright.chromium.launch(headless = True)
     elif browser_name == "firefox":
         browser: Browser = playwright.firefox.launch(headless = True)
     elif browser_name == "webkit":
