@@ -170,19 +170,54 @@ docker-compose up --build
 Plik `.github/workflows/main.yml`:
 
 ```yaml
-name: Tests
-on: [push, pull_request]
+name: CI pipeline
+
+on:
+  push:
+    branches: [main]
+
 jobs:
-  test:
+  setup:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - run: pip install -r requirements.txt
-      - run: playwright install
-      - run: pytest Tests/ -v
+          python-version: "3.13.5"
+
+      - name: Prepare report folder
+        run: |
+            mkdir -p test-reports
+            mkdir -p traces
+    
+  tests:
+    runs-on: ubuntu-latest
+    needs: setup
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13.5"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install
+
+      - name: run tests
+        run: pytest -n 3 Tests/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: tests-report
+          path: test-reports/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: traces
+          path: traces/
 ```
 
 ## Bonus: SQL - Weryfikacja relacji filmu z kategorią
