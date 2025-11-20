@@ -19,6 +19,7 @@ jobs:
       - name: Prepare report folder
         run: |
             mkdir -p test-reports
+            mkdir -p traces
     
   tests:
     runs-on: ubuntu-latest
@@ -41,3 +42,7 @@ jobs:
         with:
           name: tests-report
           path: test-reports/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: traces
+          path: traces/

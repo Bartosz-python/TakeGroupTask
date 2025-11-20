@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  playwright-tests:
+    build:
+      context: .
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./test-reports:/app/test-reports
+      - ./traces:/app/traces
+      - ./Tests:/app/Tests
+    environment:
+      - PYTHONUNBUFFERED=1
+    command: >
+      pytest
+      --html=test-reports/report.html
+      --self-contained-html
+      --browser_name=chrome
+      -v
