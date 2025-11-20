@@ -54,6 +54,7 @@ W teście weryfikuję, że endpoint zwraca HTTP 200 i że wyniki zawierają film
 - Strona wyświetla modal RODO przy pierwszym wejściu; dodałem krok, żeby go zaakceptować.
 - Selektory są dynamiczne; użyłem `get_by_text()` z regexem na nieczułość wielkości liter zamiast klas CSS.
 - Wyszukiwanie jest asynchroniczne; bez `expect().to_be_visible()` testy mogą być niestabilne.
+- Test pozytywny nie został skończony ze względu na overlay przy przycisku play, którego nie potrafię obejść.
 
 ## Raporty błędów
 
@@ -82,7 +83,7 @@ The "Clear" button should reset all sorting criteria to their default state, and
 The "Clear" button has no effect. Applied sorting criteria remain active and movies continue to be filtered.
 
 **Environment:**
-Reproduced on Chrome and Firefox on Windows 11 (10.0.26100)
+Reproduced on Chrome and Firefox on Windows 11 (10.0.26100).
 
 ### Błąd #2: "Popularity" criteria stops working with "Oldest/Newest Productions" (Medium priority)
 
