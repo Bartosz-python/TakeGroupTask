@@ -5,8 +5,6 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-    ports:
-      - "8080:8080"
     volumes:
       - ./test-reports:/app/test-reports
       - ./traces:/app/traces
